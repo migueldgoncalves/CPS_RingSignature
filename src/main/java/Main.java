@@ -26,7 +26,39 @@ public class Main {
 
                 switch (Integer.valueOf(option)) {
                     case 1:
-                        System.out.println("1 selected");
+                        System.out.println("Choose group size: ");
+                        option = reader.readLine();
+
+                        while (true) {
+                            if(tryParseInt(option)) {
+                                if (Integer.valueOf(option) >= 2 && Integer.valueOf(option) <= 9) {
+                                    break;
+                                }
+                            }
+                            System.out.println("Please introduce only a number between 2 and 9:");
+                            option = reader.readLine();
+                        }
+
+                        Manager.groupSetter(Integer.valueOf(option));
+
+                        System.out.println("Choose the member to sign message: ");
+                        option = reader.readLine();
+
+                        while (true) {
+                            if(tryParseInt(option)) {
+                                if (Integer.valueOf(option) >= 1 && Integer.valueOf(option) <= Manager.members.size()) {
+                                    break;
+                                }
+                            }
+                            System.out.println("Please introduce only a number between 1 and " + Manager.members.size());
+                            option = reader.readLine();
+                        }
+
+                        System.out.println("Write the message to be signed: ");
+                        String message = reader.readLine();
+
+                        Manager.members.get(Integer.valueOf(option)).sign(message);
+
                         break;
                     case 2:
                         System.out.println("2 selected");
